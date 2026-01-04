@@ -1,0 +1,43 @@
+{
+  "classes": [
+    "normal",
+    "benign",
+    "malignant"
+  ],
+  "classifier": {
+    "input_size": [
+      224,
+      224
+    ],
+    "input_channels": 3,
+    "normalize": "uint8 -> float32 /255.0 (range [0,1])",
+    "outputs": "probabilities [normal, benign, malignant]",
+    "files": {
+      "keras": "classifier.keras",
+      "savedmodel": "classifier_savedmodel",
+      "onnx": "onnx/classifier.onnx",
+      "tflite": "tflite/classifier.tflite"
+    }
+  },
+  "segmenter": {
+    "input_size": [
+      256,
+      256
+    ],
+    "input_channels": 3,
+    "normalize": "uint8 -> float32 /255.0 (range [0,1])",
+    "outputs": "mask probability map (H,W,1)",
+    "threshold": 0.5,
+    "files": {
+      "keras": "segmenter.keras",
+      "savedmodel": "segmenter_savedmodel",
+      "onnx": "onnx/segmenter.onnx",
+      "tflite": "tflite/segmenter.tflite"
+    }
+  },
+  "notes": [
+    "If your source image is grayscale: repeat channel to RGB.",
+    "Segmenter currently trained with pseudo-masks; quality depends on pseudo labels.",
+    "If you retrain after preprocessing fix, regenerate exports + update metadata."
+  ]
+}
