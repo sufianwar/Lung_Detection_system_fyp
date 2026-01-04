@@ -1,0 +1,18 @@
+services:
+  backend:
+    platform: linux/amd64
+    build: ./backend
+    container_name: lung-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/models:/app/models:ro   # ✅ ADD THIS
+
+  frontend:
+    platform: linux/amd64
+    build: ./frontend
+    container_name: lung-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
